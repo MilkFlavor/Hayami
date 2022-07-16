@@ -1,15 +1,14 @@
 // Download memes from Reddit
-const fs = require("fs");
-const path = require("path");
-const https = require("https");
-
+import fs from 'fs';
+import path from 'path';
+import https from 'https';
 // settings
 const userAgent = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/70.0.3538.102 Safari/537.36";
 const cookies = "over18=1";
 const sub = "memes";
 const limit = 20;
 const outputPath = path.join(__dirname, sub);
-const dump = path.join(__dirname, "dump");
+const dump = process.argv.includes("--dump");
 
 if (!sub || !limit) {
     console.log("Error: --sub and --limit is required. Use --help for more details.");
