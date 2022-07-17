@@ -12,12 +12,6 @@ const limit = 20;
 const outputPath = path.join(__dirname, sub);
 const dump = process.argv.includes("--dump");
 
-/* Checking if the user has provided the required arguments. */
-if (!sub || !limit) {
-    console.log("Error: --sub and --limit is required. Use --help for more details.");
-    process.exit(1);
-}
-
 /* Checking if the output path exists, and if it doesn't, it creates it. */
 if (!fs.existsSync(outputPath))
     fs.mkdirSync(outputPath, { recursive: true });
