@@ -1,9 +1,5 @@
 #!/usr/bin/bash
 
-# Check if necessary programs are installed
-for prog in dmenu jq sxiv; do
-	[ ! "$(which "$prog")" ] && echo "Please install $prog!" && exit 1
-done
 # If notify-send is not installed, use echo as notifier
 [ ! "$(which notify-send)" ] && notifier="echo" || notifier="notify-send"
 
