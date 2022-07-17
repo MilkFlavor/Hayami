@@ -2,6 +2,7 @@
 import fs from 'fs';
 import path from 'path';
 import https from 'https';
+import { processPage } from './extract';
 // settings
 const userAgent = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/70.0.3538.102 Safari/537.36";
 const cookies = "over18=1";
@@ -44,27 +45,6 @@ function downloadPage(url, page = 1, dumpPages = false) {
                 res.on('end', () => resolve(buffer));
             });
     });
-}
-
-// Extract URLs from HTML
-function processPage(html) {
-    let imageUrls = [];
-    for (let imageUrl of html.matchAll(/https:\/\/i\.redd\.it\/[0-9a-z_]{10,16}\.((png)|(jpg)|(gif))/g))
-        imageUrls.push(imageUrl[0]);
-
-    let next = html
-        .match(/<link rel="next" href=".+"\/>/);
-    if (!next)
-        return false;
-    next = next[0]
-        .split("\"")[3]
-        .replace(/&amp;/g, "&");
-
-    if (imageUrls.length <= 0)
-        return false;
-    return {
-        imageUrls, next
-    };
 }
 
 // Download images by URL
