@@ -1,9 +1,10 @@
-// Download memes from Reddit
+/* Importing the modules that are required for the program to run. */
 import fs from 'fs';
 import path from 'path';
 import https from 'https';
 import { processPage } from './extract';
-// settings
+
+/* Setting the variables for the program. */
 const userAgent = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/70.0.3538.102 Safari/537.36";
 const cookies = "over18=1";
 const sub = "memes";
@@ -11,16 +12,27 @@ const limit = 20;
 const outputPath = path.join(__dirname, sub);
 const dump = process.argv.includes("--dump");
 
+/* Checking if the user has provided the required arguments. */
 if (!sub || !limit) {
     console.log("Error: --sub and --limit is required. Use --help for more details.");
     process.exit(1);
 }
 
-// Output path (create if not existing)
+/* Checking if the output path exists, and if it doesn't, it creates it. */
 if (!fs.existsSync(outputPath))
     fs.mkdirSync(outputPath, { recursive: true });
 
-// Download HTML pages from reddit
+/**
+ * It downloads a page from the given URL, and returns a promise that resolves to the page's HTML
+ * 
+ * Args:
+ *   url: The URL of the page to download.
+ *   page: The page number to download. Defaults to 1
+ *   dumpPages: If true, the HTML of each page will be saved to a file. Defaults to false
+ * 
+ * Returns:
+ *   A promise that resolves to the HTML of the page.
+ */
 function downloadPage(url, page = 1, dumpPages = false) {
     return new Promise((resolve, reject) => {
         https.get(
@@ -47,7 +59,15 @@ function downloadPage(url, page = 1, dumpPages = false) {
     });
 }
 
-// Download images by URL
+/**
+ * It downloads an image from a given URL and saves it to a file
+ * 
+ * Args:
+ *   url: The URL of the image to download.
+ * 
+ * Returns:
+ *   A promise that resolves to an object with a filepath property.
+ */
 function downloadImage(url) {
     return new Promise((resolve, reject) => {
         https.get(
@@ -78,7 +98,7 @@ function downloadImage(url) {
     });
 }
 
-// Execute job
+/* A self-invoking function. */
 (async function () {
 
     let totalFound = 0;
