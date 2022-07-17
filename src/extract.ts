@@ -1,4 +1,10 @@
 // Extract URLs from HTML
+/**
+ * It takes a string of HTML, and returns an object with an array of image URLs and the URL of the next
+ * page
+ * @param html - The HTML of the page to process.
+ * @returns An object with two properties: imageUrls and next.
+ */
 export function processPage(html) {
     let imageUrls = [];
     for (let imageUrl of html.matchAll(/https:\/\/i\.redd\.it\/[0-9a-z_]{10,16}\.((png)|(jpg)|(gif))/g))
