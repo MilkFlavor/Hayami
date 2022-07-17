@@ -1,4 +1,4 @@
-#!/usr/bin/bash
+#!/bin/bash
 
 # If notify-send is not installed, use echo as notifier
 [ ! "$(which notify-send)" ] && notifier="echo" || notifier="notify-send"
@@ -73,7 +73,7 @@ imgs=$(jq '.' < "$cachedir/tmp.json" | grep url_overridden_by_dest | grep -Eo "h
 # Download images to $cachedir
 for img in $imgs; do
 	if [ ! -e "$cachedir/${img##*/}" ]; then
-		wget -q -O "$cachedir/${img##*/}" "$img"
+		wget -q -O -U "$cachedir/${img##*/}" "$img"
 	fi
 done
 
@@ -83,7 +83,7 @@ rm "$cachedir/tmp.json"
 
 # Display the images
 if [ $FILTER -eq 1 ]; then
-	sxiv -a -o "$cachedir"
+	sxiv -a -o -s f "$cachedir"
 else
-	sxiv -a "$cachedir"
+	sxiv -a -s f"$cachedir"
 fi
