@@ -1,0 +1,17 @@
+#!/bin/bash
+help_info(){
+	echo ""
+    echo "Usage: $0 [SUBREDDIT] [options]..."
+	echo ""
+	echo "[subreddits]"
+	echo "Any subreddit that you can think of as long as it has images."
+	echo ""
+	echo "[options]:"
+	echo "  -h, --help      show this help message and exit"
+	echo "  -v, --version   show version and exit"
+	echo "                  (current ver:0.0.1)"
+	echo "  -l, --limit     change the amount of images to download"
+	echo "                  (default: 10)"
+	echo ""
+	echo "Copyright © 2022 MilkFlavor『フレーバー』"
+}

@@ -1,17 +1,15 @@
 #!/bin/bash
 
+# shellcheck source=/dev/null
+source ./src/help
+
 version="0.0.1"
 
 # args
 while [ $# -gt 0 ]; do
 	case $1 in
 		-h|--help)
-			echo "Usage: $0 [OPTION]..."
-			echo "Run the application."
-			echo "  -h, --help		show this help message and exit"
-			echo "  -v, --version   show version and exit"
-			echo "  -l, --limit     amount of images to download"
-			echo "     Show this help."
+			help_info
 			exit 0
 			;;
 		-l|--limit)
