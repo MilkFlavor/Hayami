@@ -1,0 +1,10 @@
+#!/bin/bash
+get_subreddit(){
+    if [ -z "$subreddit" ]; then
+	# Ask the user to enter a subreddit
+	echo "Enter a subreddit: "
+	read -r subreddit
+	# If no subreddit was chosen, exit
+	[ -z "$subreddit" ] && echo "no sub chosen" && exit 1
+fi
+}

@@ -1,0 +1,5 @@
+#!/bin/bash
+export version=0.0.1
+version() {
+    echo "hayami ver:0.0.1"
+}

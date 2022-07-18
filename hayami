@@ -1,9 +1,9 @@
 #!/bin/bash
 
 # shellcheck source=/dev/null
-source ./src/help
-
-version="0.0.1"
+source ./src/help # Show help message
+source ./src/args # Get sub from user (get_subreddit)
+source ./src/version # Show version
 
 # args
 while [ $# -gt 0 ]; do
@@ -23,7 +23,7 @@ while [ $# -gt 0 ]; do
 			shift
 			;;
 		-v|--version)
-			echo "version: $version"
+			version
 			exit 0
 			;;
 		*)
@@ -45,13 +45,7 @@ configdir="${XDG_CONFIG_HOME:-$HOME/.config}/redyt"
 [ ! -f "$configdir/subreddit.txt" ] && echo "File $configdir/subreddit.txt does not exist, creating..." && touch "$configdir/subreddit.txt"
 
 # If no argument is passed
-if [ -z "$subreddit" ]; then
-	# Ask the user to enter a subreddit
-	echo "Enter a subreddit: "
-	read -r subreddit
-	# If no subreddit was chosen, exit
-	[ -z "$subreddit" ] && echo "no sub chosen" && exit 1
-fi
+get_subreddit
 
 # Default directory used to store the feed file and fetched images
 cachedir="./images"
