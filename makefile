@@ -1,5 +1,8 @@
 DESTDIR=~/.local/bin/
 
+run:
+	./hayami
+
 install:
 	mkdir -p $(DESTDIR) 2> /dev/null
 	mkdir -p ~/.cache/redyt/
