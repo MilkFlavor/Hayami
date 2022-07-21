@@ -5,6 +5,8 @@ source ./src/help # Show help message
 source ./src/sub # Get sub from user (get_subreddit)
 source ./src/version # Show version
 source ./src/scrap # Scrap images from subreddit
+source ./src/cache # Cache images
+source ./src/dir # Get directory from user (get_dir)
 
 # args
 while [ $# -gt 0 ]; do
@@ -34,28 +36,14 @@ while [ $# -gt 0 ]; do
 	esac
 done
 
-# Default config directory
-configdir="${XDG_CONFIG_HOME:-$HOME/.config}/redyt"
-
-# Create .config/redyt if it does not exist to prevent
-# the program from not functioning properly
-[ ! -d "$configdir" ] && echo "Directory $configdir does not exist, creating..." && mkdir -p "$configdir"
-
-# If subreddit.txt does not exist, create it to prevent
-# the program from not functioning properly
-[ ! -f "$configdir/subreddit.txt" ] && echo "File $configdir/subreddit.txt does not exist, creating..." && touch "$configdir/subreddit.txt"
+get_dir
 
 # If no argument is passed
 get_subreddit
 
-# Default directory used to store the feed file and fetched images
-cachedir="./images"
+cache
 
-# If cachedir does not exist, create it
-if [ ! -d "$cachedir" ]; then
-	echo "Directory $cachedir does not exist, creating..."
-	mkdir -p "$cachedir"
-fi
+${cachedir:?}
 
 scrap "$subreddit" "$cachedir"
 

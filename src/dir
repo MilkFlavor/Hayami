@@ -1,0 +1,14 @@
+#!/bin/bash
+
+get_dir() {
+    # Default config directory
+    configdir="./tmp/cache"
+
+    # Create .config/redyt if it does not exist to prevent
+    # the program from not functioning properly
+    [ ! -d "$configdir" ] && echo "Directory $configdir does not exist, creating..." && mkdir -p "$configdir"
+
+    # If subreddit.txt does not exist, create it to prevent
+    # the program from not functioning properly
+    [ ! -f "$configdir/subreddit.txt" ] && echo "File $configdir/subreddit.txt does not exist, creating..." && touch "$configdir/subreddit.txt"
+}

@@ -1,0 +1,13 @@
+#!/bin/bash
+
+# Default directory used to store the feed file and fetched images
+cachedir="./images"
+
+cache() {
+
+    # If cachedir does not exist, create it
+    if [ ! -d "$cachedir" ]; then
+        echo "Directory $cachedir does not exist, creating..."
+        mkdir -p "$cachedir"
+    fi
+}
