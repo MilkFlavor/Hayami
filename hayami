@@ -8,34 +8,6 @@ source ./src/scrap # Scrap images from subreddit
 source ./src/cache # Cache images
 source ./src/dir # Get directory from user (get_dir)
 
-# args
-while [ $# -gt 0 ]; do
-	case $1 in
-		-h|--help)
-			help_info
-			exit 0
-			;;
-		-l|--limit)
-			shift
-			LIMIT=$1
-			case $LIMIT in
-				''|*[!0-9]*)
-					echo 'limit is NaN'
-					exit 1
-			esac
-			shift
-			;;
-		-v|--version)
-			version
-			exit 0
-			;;
-		*)
-			subreddit=$1
-			shift
-			;;
-	esac
-done
-
 get_dir
 
 # If no argument is passed
@@ -43,6 +15,7 @@ get_subreddit
 
 cache
 
+${subreddit:?}
 ${cachedir:?}
 
 scrap "$subreddit" "$cachedir"
