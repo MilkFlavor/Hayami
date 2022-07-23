@@ -7,10 +7,10 @@ scrap() {
     # Download the subreddit feed, containing only the
     # first 100 entries (limit), and store it inside
     # cachedir/tmp.json
-    curl -H "User-agent: '$useragent'" "https://www.reddit.com/r/$1/hot.json?limit=${LIMIT:-100}" > "$2/tmp.json"
+    curl -H "User-agent: '$useragent'" "https://www.reddit.com/r/$1/hot.json?limit=${LIMIT:-100}" > "$3/tmp.json"
 
     # Create a list of images
-    imgs=$(jq '.' < "$2/tmp.json" | grep url_overridden_by_dest | grep -Eo "http(s|)://.*(jpg|png)\b" | sort -u)
+    imgs=$(jq '.' < "$3/tmp.json" | grep url_overridden_by_dest | grep -Eo "http(s|)://.*(jpg|png)\b" | sort -u)
 
     # Download images to $cachedir
     for img in $imgs; do

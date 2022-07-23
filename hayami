@@ -43,9 +43,10 @@ get_subreddit
 
 cache
 
+${configdir:?}
 ${cachedir:?}
 
-scrap "$subreddit" "$cachedir"
+scrap "$subreddit" "$cachedir" "$configdir"
 
 # Once finished, remove all of the cached images
 #[[ "$KEEP" != "1" ]] && rm "${cachedir:?}"/*
