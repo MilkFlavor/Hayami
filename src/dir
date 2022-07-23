@@ -2,7 +2,7 @@
 
 get_dir() {
     # Default config directory
-    configdir="./tmp/config"
+    configdir="./tmp/cache"
 
     # Create .config/redyt if it does not exist to prevent
     # the program from not functioning properly
